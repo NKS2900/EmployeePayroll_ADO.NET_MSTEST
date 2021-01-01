@@ -141,6 +141,33 @@ namespace EmployeePayrollTestCases
             bool result = employeePayrollRepo.InsertEmployee(model);
             Assert.AreEqual(expected, result);
         }
+
+        /// <summary>
+        /// Given Employee Payroll When Add New Employee Then should Return Expected Result
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeePayroll_WhenAddNewEmployee_ThenshouldReturnExpectedResult()
+        {
+            bool expected = true;
+            EmployeeRepo employeePayrollRepo = new EmployeeRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeID = 109,
+                EmployeeName = "Rushi",
+                BasicPay = 510000,
+                start_date = new DateTime(2016, 08, 12),
+                gendre = 'M',
+                PhoneNumber = "3216549870",
+                Address = "Latur",
+                Department = "Finance",
+                Deduction = 6600.00,
+                TaxablePay = 5500,
+                NetPay = 4000,
+                Tax = 5000.00,
+            };
+            bool result = employeePayrollRepo.addEmployeeToPayroll(model);
+            Assert.AreEqual(expected, result);
+        }
     }
 }
 

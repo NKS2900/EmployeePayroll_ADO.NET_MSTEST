@@ -372,5 +372,60 @@ namespace EmployeePayroll_ADO.NET_MSTEST
                 this.connection.Close();
             }
         }
+
+        public bool addEmployeeToPayroll(EmployeeModel empModel)
+        {
+            try
+            {
+                SqlCommand command = new SqlCommand("payrollProcedure", this.connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@EmployeeID", empModel.EmployeeID);
+                command.Parameters.AddWithValue("@EmployeeName", empModel.EmployeeName);
+                command.Parameters.AddWithValue("@BasicPay", empModel.BasicPay);
+                command.Parameters.AddWithValue("@StartDate", empModel.start_date);
+                command.Parameters.AddWithValue("@Gender", empModel.gendre);
+                command.Parameters.AddWithValue("@PhoneNumber", empModel.PhoneNumber);
+                command.Parameters.AddWithValue("@Address", empModel.Address);
+                command.Parameters.AddWithValue("@Department", empModel.Department);
+                command.Parameters.AddWithValue("@Deduction", empModel.Deduction);
+                command.Parameters.AddWithValue("@TaxablePay", empModel.TaxablePay);
+                command.Parameters.AddWithValue("@NetPay", empModel.NetPay);
+                command.Parameters.AddWithValue("@Tax", empModel.Tax);
+                this.connection.Open();
+                command.ExecuteNonQuery();
+                this.connection.Close();
+
+                int employee_id = empModel.EmployeeID;
+                double deduction = empModel.BasicPay * 0.2;
+                double taxable_pay = empModel.BasicPay - deduction;
+                double tax = taxable_pay * 0.1;
+                double net_pay = empModel.BasicPay - tax;
+                SqlCommand sqlCommand = new SqlCommand("spPayrollDeatilProcedure", this.connection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@EmployeeId", (empModel.EmployeeID));
+                sqlCommand.Parameters.AddWithValue("@Deduction", (empModel.BasicPay*0.2));
+                sqlCommand.Parameters.AddWithValue("@TaxablePay", (empModel.BasicPay - deduction));
+                sqlCommand.Parameters.AddWithValue("@NetPay", (taxable_pay*0.1));
+                sqlCommand.Parameters.AddWithValue("@Tax", (empModel.BasicPay - tax));
+                this.connection.Open();
+                var result = sqlCommand.ExecuteNonQuery();
+                this.connection.Close();
+                if (result != 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            finally
+            {
+                this.connection.Close();
+            }
+
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace EmployeePayroll_ADO.NET_MSTEST
             Console.WriteLine(emprepo.getMaxSalary());
             Console.WriteLine(emprepo.getCountSalary());
             Console.WriteLine(emprepo.getCountSalary());
-
         }
     }
 }
