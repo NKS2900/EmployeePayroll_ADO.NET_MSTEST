@@ -35,10 +35,22 @@ namespace EmployeePayrollTestCases
         [TestMethod]
         public void GivenEmployeeName_WhenUpdateSalary_ThenReturnExpectedSalary()
         {
-            int result = 3000000;
             EmployeeRepo emprepo = new EmployeeRepo();
             double expect = emprepo.UpdateEmployee();
+            int result = 3000000;
             Assert.AreEqual(result, expect);
+        }
+
+        /// <summary>
+        /// retrive employee who joined in perticular date range.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeeNames_WhenUpdateSalary_ThenReturnExpectedSalary()
+        {  
+            EmployeeRepo emprepo = new EmployeeRepo();
+            int count = emprepo.getEmployeeDataWithGivenRange();
+            int expected = 4;
+            Assert.AreEqual(expected, count);
         }
     }
 }
