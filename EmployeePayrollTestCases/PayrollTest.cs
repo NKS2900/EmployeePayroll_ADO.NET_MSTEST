@@ -1,5 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using EmployeePayroll_ADO.NET_MSTEST;
+using System;
+
 namespace EmployeePayrollTestCases
 {
     [TestClass]
@@ -11,10 +13,10 @@ namespace EmployeePayrollTestCases
         [TestMethod]
         public void ChekConnection()
         {
-           EmployeeRepo emprepo = new EmployeeRepo();
+            EmployeeRepo emprepo = new EmployeeRepo();
             bool result = emprepo.EstablishConnection();
             bool expect = true;
-            Assert.AreEqual(result,expect);
+            Assert.AreEqual(result, expect);
         }
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace EmployeePayrollTestCases
             EmployeeRepo emprepo = new EmployeeRepo();
             int result = emprepo.GetAllRecords();
             int expect = 7;
-            Assert.AreEqual(result,expect);
+            Assert.AreEqual(result, expect);
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace EmployeePayrollTestCases
         /// </summary>
         [TestMethod]
         public void GivenEmployeeStartDate_ThenReturnTotalEmployeeBetweenRange()
-        {  
+        {
             EmployeeRepo emprepo = new EmployeeRepo();
             int count = emprepo.getEmployeeDataWithGivenRange();
             int expected = 4;
@@ -112,5 +114,35 @@ namespace EmployeePayrollTestCases
             int count = emprepo.getCountSalary();
             Assert.AreEqual(expected, count);
         }
+
+        /// <summary>
+        /// Givens the employee names when count by salary then return expected count by salary.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeeNamess_WhenCountBySalary_ThenReturnExpectedCountBySalary()
+        {
+            bool expected = true;
+            EmployeeRepo employeePayrollRepo = new EmployeeRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeID = 108,
+                EmployeeName = "Mahesh",
+                BasicPay = 450000,
+                start_date = new DateTime(2016, 07, 04),
+                gendre = 'M',
+                PhoneNumber = "3216549870",
+                Address = "golai",
+                Department = "Finance",
+                Deduction = 6600.00,
+                TaxablePay = 5500,
+                NetPay = 4000,
+                Tax = 5000.00,
+            };
+            bool result = employeePayrollRepo.InsertEmployee(model);
+            Assert.AreEqual(expected, result);
+        }
     }
 }
+
+
+

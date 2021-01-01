@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -329,6 +330,46 @@ namespace EmployeePayroll_ADO.NET_MSTEST
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public bool InsertEmployee(EmployeeModel empModel)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("payrollProcedure", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@EmployeeID", empModel.EmployeeID);
+                    command.Parameters.AddWithValue("@EmployeeName", empModel.EmployeeName);
+                    command.Parameters.AddWithValue("@BasicPay", empModel.BasicPay);
+                    command.Parameters.AddWithValue("@StartDate", empModel.start_date);
+                    command.Parameters.AddWithValue("@Gender", empModel.gendre);
+                    command.Parameters.AddWithValue("@PhoneNumber", empModel.PhoneNumber);
+                    command.Parameters.AddWithValue("@Address", empModel.Address);
+                    command.Parameters.AddWithValue("@Department", empModel.Department);
+                    command.Parameters.AddWithValue("@Deduction", empModel.Deduction);
+                    command.Parameters.AddWithValue("@TaxablePay", empModel.TaxablePay);
+                    command.Parameters.AddWithValue("@NetPay", empModel.NetPay);
+                    command.Parameters.AddWithValue("@Tax", empModel.Tax);
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    this.connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
             }
         }
     }
