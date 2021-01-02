@@ -231,6 +231,22 @@ namespace EmployeePayrollTestCases
             int count = empRepo.getEmployeeDataWithGivenRange();
             Assert.AreEqual(expected, count);
         }
+
+        /// <summary>
+        /// Given Employee Id use to delet record from both the tables
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeePayrollID_WhenDeletInTable_ThenshouldReturnExpectedResult()
+        {
+            bool expected = true;
+            EmployeeRepo employeePayrollRepo = new EmployeeRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeID = 110,
+            };
+            bool result = employeePayrollRepo.DeleteEmployeeUsingID(model);
+            Assert.AreEqual(expected, result);
+        }
     }
 }
 

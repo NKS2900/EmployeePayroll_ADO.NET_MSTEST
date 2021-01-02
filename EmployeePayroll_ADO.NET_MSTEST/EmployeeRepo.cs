@@ -427,5 +427,35 @@ namespace EmployeePayroll_ADO.NET_MSTEST
             }
 
         }
+
+        public bool DeleteEmployeeUsingID(EmployeeModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("deletEmpProcedure", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@EmployeeId", model.EmployeeID);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+
+                    SqlCommand command1 = new SqlCommand("deletPayrollDetail", connection);
+                    command1.CommandType = CommandType.StoredProcedure;
+                    command1.Parameters.AddWithValue("@EmployeeId", model.EmployeeID);
+                    connection.Open();
+                    command1.ExecuteNonQuery();
+                    connection.Close();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw new Exception(e.Message);
+                
+            }
+        }
     }
 }
