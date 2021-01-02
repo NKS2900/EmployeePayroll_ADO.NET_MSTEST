@@ -126,12 +126,12 @@ namespace EmployeePayrollTestCases
             EmployeeModel model = new EmployeeModel
             {
                 EmployeeID = 108,
-                EmployeeName = "Mahesh",
+                EmployeeName = "Ganesh",
                 BasicPay = 450000,
                 start_date = new DateTime(2016, 07, 04),
                 gendre = 'M',
                 PhoneNumber = "3216549870",
-                Address = "golai",
+                Address = "ambajogai",
                 Department = "Finance",
                 Deduction = 6600.00,
                 TaxablePay = 5500,
