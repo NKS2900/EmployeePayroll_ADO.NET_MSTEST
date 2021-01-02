@@ -168,6 +168,69 @@ namespace EmployeePayrollTestCases
             bool result = employeePayrollRepo.addEmployeeToPayroll(model);
             Assert.AreEqual(expected, result);
         }
+
+        /// <summary>
+        /// UC_10 GivenEmployee_PayrollServiceDb add new record in DB.
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployee_PayrollServiceDb_AddNewEmployee()
+        {
+            bool expected = true;
+            EmployeeRepo employeePayrollRepo = new EmployeeRepo();
+            EmployeeModel model = new EmployeeModel
+            {
+                EmployeeID = 110,
+                EmployeeName = "Rahul",
+                BasicPay = 450000,
+                start_date = new DateTime(2016, 07, 04),
+                gendre = 'M',
+                PhoneNumber = "3216549870",
+                Address = "ambajogai",
+                Department = "Finance",
+                Deduction = 6600.00,
+                TaxablePay = 5500,
+                NetPay = 4000,
+                Tax = 5000.00,
+            };
+            bool result = employeePayrollRepo.addEmployeeToPayroll(model);
+            Assert.AreEqual(expected, result);
+        }
+
+        /// <summary>
+        /// UC10 Given Query When Insert Then should Perform Retrival Operation.
+        /// </summary>
+        [TestMethod]
+        public void GivenQuery_WhenInsert_ThenshouldPerformRetrivalOperation()
+        {
+            int expected = 10;
+            EmployeeRepo employeeRepo = new EmployeeRepo();
+            int count = employeeRepo.GetAllRecords();
+            Assert.AreEqual(expected, count);
+        }
+
+        /// <summary>
+        /// UC10 Given Query When Insert Then should Perform Update Operation.
+        /// </summary>
+        [TestMethod]
+        public void GivenQuery_WhenInsert_ThenshouldPerformUpdateOperation()
+        {
+            int expected = 3000000;
+            EmployeeRepo empRepo = new EmployeeRepo();
+            double count = empRepo.UpdateEmployee();
+            Assert.AreEqual(expected, count);
+        }
+
+        /// <summary>
+        /// UC10 Given Query When Insert Then should Perform get Employee Data With Given Rang.
+        /// </summary>
+        [TestMethod]
+        public void GivenQuery_WhenInsert_ThenshouldPerformgetEmployeeDataWithGivenRange()
+        {
+            int expected = 10;
+            EmployeeRepo empRepo = new EmployeeRepo();
+            int count = empRepo.getEmployeeDataWithGivenRange();
+            Assert.AreEqual(expected, count);
+        }
     }
 }
 
