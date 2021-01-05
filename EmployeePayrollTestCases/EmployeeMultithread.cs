@@ -37,14 +37,14 @@ namespace EmployeePayrollTestCases
             EmployeeRepo payrollRepo = new EmployeeRepo();
             EmployeeModel employeeModel = new EmployeeModel
             {
-                EmployeeID = 13,
-                EmployeeName = "Mohin",
-                BasicPay = 450000,
-                start_date = new DateTime(2021, 01, 01),
+                EmployeeID = 14,
+                EmployeeName = "Deva",
+                BasicPay = 650000,
+                start_date = new DateTime(2018, 01, 01),
                 gendre = 'M',
                 PhoneNumber = "1234567890",
-                Department = "IT",
-                Address = "Pune",
+                Department = "JiO",
+                Address = "Latur",
                 Deduction = 6000,
                 TaxablePay = 3500,
                 NetPay = 56000,
