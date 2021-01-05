@@ -294,11 +294,6 @@ namespace EmployeePayroll_ADO.NET_MSTEST
             }
         }
 
-        /// <summary>
-        /// Gets the maximum salary.
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
         public int getCountSalary()
         {
             try
