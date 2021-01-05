@@ -17,7 +17,7 @@ namespace EmployeePayrollTestCases
         public void TestMethod1()
         {
             List<EmployeeModel> modelList = new List<EmployeeModel>();
-            modelList.Add(new EmployeeModel() { EmployeeID = 1, EmployeeName = "Nijam", BasicPay = 500000, start_date = new DateTime(2019, 01, 01), gendre = 'M', PhoneNumber = "1245789630", Department = "IT", Address = "Beed", Deduction = 3000, TaxablePay = 2500, NetPay = 40000, Tax = 440});
+            modelList.Add(new EmployeeModel() { EmployeeID = 1, EmployeeName = "Nijam", BasicPay = 500000, start_date = new DateTime(2019, 01, 01), gendre = 'M', PhoneNumber = "1245789630", Department = "IT", Address = "Beed", Deduction = 3000, TaxablePay = 2500, NetPay = 40000, Tax = 440 });
             modelList.Add(new EmployeeModel() { EmployeeID = 2, EmployeeName = "Imran", BasicPay = 300000, start_date = new DateTime(2018, 01, 01), gendre = 'M', PhoneNumber = "1245789630", Department = "DS", Address = "Pune", Deduction = 3000, TaxablePay = 2500, NetPay = 40600, Tax = 450 });
             modelList.Add(new EmployeeModel() { EmployeeID = 4, EmployeeName = "Dipak", BasicPay = 900000, start_date = new DateTime(2017, 01, 01), gendre = 'M', PhoneNumber = "1245789630", Department = "IT", Address = "Latur", Deduction = 3000, TaxablePay = 2500, NetPay = 40500, Tax = 460 });
             modelList.Add(new EmployeeModel() { EmployeeID = 3, EmployeeName = "Mahesh", BasicPay = 700000, start_date = new DateTime(2016, 01, 01), gendre = 'F', PhoneNumber = "1245789630", Department = "HR", Address = "Parli", Deduction = 3000, TaxablePay = 2500, NetPay = 40500, Tax = 540 });
@@ -59,6 +59,34 @@ namespace EmployeePayrollTestCases
             employeePayroll.AddEmployeeToPayroll(modelList);
             DateTime endTimeWithThread = DateTime.Now;
             Console.WriteLine("Execution_Time_Using_Thread : " + (startTimeWithThread - endTimeWithThread));
+        }
+
+        /// <summary>
+        /// Add Employee Details in both emplyee and payroll and caluculate execution time
+        /// </summary>
+        [TestMethod]
+        public void GivenQuery_WhenInsert_ShouldRecordExecutionTime()
+        {
+            EmployeeRepo payrollRepo = new EmployeeRepo();
+            EmployeeModel employeeModel = new EmployeeModel
+            {
+                EmployeeID = 14,
+                EmployeeName = "Pooja",
+                BasicPay = 650000,
+                start_date = new DateTime(2018, 01, 01),
+                gendre = 'F',
+                PhoneNumber = "1234567890",
+                Department = "HR",
+                Address = "Latur",
+                Deduction = 6000,
+                TaxablePay = 3500,
+                NetPay = 56000,
+                Tax = 1200
+            };
+            DateTime startTimes = DateTime.Now;
+            payrollRepo.addEmployeeToPayroll(employeeModel);
+            DateTime endTimes = DateTime.Now;
+            Console.WriteLine("Execution_Time_without_Thread_DB : " + (endTimes - startTimes));
         }
     }
 }
