@@ -4,7 +4,7 @@ namespace EmployeePayroll_ADO.NET_MSTEST
 {
     class Program
     {
-        public void show()
+        static void Main(string[] args)
         {
             Console.WriteLine("***Welcome_To_Employee_Payroll_Service_MSTEST***");
             EmployeeRepo emprepo = new EmployeeRepo();
