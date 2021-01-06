@@ -452,5 +452,31 @@ namespace EmployeePayroll_ADO.NET_MSTEST
                 
             }
         }
+
+        public double updateEmployeeSalary(EmployeeModel employeeModel)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand cmd = new SqlCommand("spUpdateEmpPayroll", this.connection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmployeeName", employeeModel.EmployeeName);
+                    cmd.Parameters.AddWithValue("@Salary", employeeModel.BasicPay);
+                    this.connection.Open();
+                    var result = cmd.ExecuteNonQuery();
+                    this.connection.Close();
+                }
+                return employeeModel.BasicPay;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }
