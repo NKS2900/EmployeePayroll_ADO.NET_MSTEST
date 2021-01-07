@@ -42,12 +42,28 @@ namespace RestSharpTestCases
             IRestResponse response = getEmployeeList();
             Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             List<Employee> dataResponse = JsonConvert.DeserializeObject<List<Employee>>(response.Content);
-            Assert.AreEqual(7, dataResponse.Count);
+            Assert.AreEqual(8, dataResponse.Count);
 
             foreach (Employee e in dataResponse)
             {
                 System.Console.WriteLine("id: " + e.id + ",Name: " + e.name + ",Salary" + e.salary);
             }
+        }
+
+        [TestMethod]
+        public void givenEmployee_OnPost_ShouldReturnAddedEmployee()
+        {
+            RestRequest request = new RestRequest("/employee", Method.POST);
+            JObject jObjectbody = new JObject();
+            jObjectbody.Add("name", "Ganesh");
+            jObjectbody.Add("salary", "10000");
+            request.AddParameter("application/json", jObjectbody, ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.Created);
+            Employee dataResponse = JsonConvert.DeserializeObject<Employee>(response.Content);
+            Assert.AreEqual("Ganesh", dataResponse.name);
+            Assert.AreEqual("10000", dataResponse.salary);
+
         }
     }
 }
