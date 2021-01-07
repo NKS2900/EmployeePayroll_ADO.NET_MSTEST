@@ -92,7 +92,7 @@ namespace RestSharpTestCases
                 Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
                 Assert.AreEqual(employeeData.name, dataResorce.name);
                 Assert.AreEqual(employeeData.salary, dataResorce.salary);
-                System.Console.WriteLine(response.Content);
+                Console.WriteLine(response.Content);
             });
 
             IRestResponse response = getEmployeeList();
@@ -117,6 +117,18 @@ namespace RestSharpTestCases
             Employee dataResorce = JsonConvert.DeserializeObject<Employee>(response.Content);
             Assert.AreEqual("Mohin", dataResorce.name);
             Assert.AreEqual("70000", dataResorce.salary);
+            Console.WriteLine(response.Content);
+        }
+
+        /// <summary>
+        /// Delete Employee record from json_Server
+        /// </summary>
+        [TestMethod]
+        public void GivenEmployeeId_WhenDelete_ThenShouldReturnSuccess()
+        {
+            RestRequest request = new RestRequest("/employee/112", Method.DELETE);
+            IRestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             Console.WriteLine(response.Content);
         }
     }
